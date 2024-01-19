@@ -8,6 +8,7 @@ const Item = ({ product,buyNow, addToCart }) => {
   const router = useRouter();
   const { item } = router.query;
 
+
   if (!product) {
     return <p>Loading...</p>;
   }

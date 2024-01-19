@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 const jwt = require('jsonwebtoken');
 import { useForm } from "react-hook-form";
 
-const updateorderdetails = () =>{
+const UpdateOrderDetails = () =>{
     const router = useRouter();
     const { userId } = router.query; // Assuming the user ID is passed as userId
     const { register, handleSubmit, setValue } = useForm();
@@ -113,4 +113,4 @@ theme="light"
   };
   
 
-export default updateorderdetails;
+export default UpdateOrderDetails;

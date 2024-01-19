@@ -4,9 +4,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from "next/router";
 const jwt = require('jsonwebtoken');
+import Link from "next/link";
 
 
-const updateorders = () => {
+const UpdateOrders = () => {
     const [orders, setOrders] = useState([]);
     const router = useRouter();
 
@@ -134,4 +135,4 @@ const updateorders = () => {
   );
 };
 
-export default updateorders;
+export default UpdateOrders;

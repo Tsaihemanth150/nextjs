@@ -114,14 +114,23 @@ const MyAccount = () => {
                       
                       <Link href={'/addAmount'}><button className="bg-cyan-500 px-2 rounded-md text-white">Add Amount</button></Link> <br/>
 
-                     {user.isAdmin===true && <Link href={'/prodcuts'}>Prodcuts:- <button className="bg-green-500 mx-1 px-3 my-5 rounded-md text-white">Add Prodcuts</button></Link> } 
-                     {user.isAdmin===true && <Link href={'/updateproduct'}> <button className="bg-yellow-500 px-3 my-5 rounded-md text-white">Upadte Prodcuts</button></Link>}
-                     {user.isAdmin===true && <Link href={'/deleteproduct'}> <button className="bg-red-500 px-3 my-5 rounded-md text-white">Delete Prodcuts</button></Link>}
-                    <br/>
                     
+                 { user.isAdmin===true    && <Link href={'/prodcuts'}>Prodcuts:- <button className="bg-green-500 mx-1 px-3 my-5 rounded-md text-white">Add Prodcuts</button></Link>  }
+                 { user.isAdmin===true    && <Link href={'/updateproduct'}> <button className="bg-yellow-500 px-3 my-5 rounded-md text-white">Upadte Prodcuts</button></Link> }
+                    { user.isAdmin===true  && <Link href={'/deleteproduct'}> <button className="bg-red-500 px-3 my-5 rounded-md text-white">Delete Prodcuts</button></Link> } 
+                  <br/>
+                        
+              { user.isStaf===true  && <Link href={'/prodcuts'}>Prodcuts:- <button className="bg-green-500 mx-1 px-3 my-5 rounded-md text-white">Add Prodcuts</button></Link>  }
+                 { user.isStaf===true    && <Link href={'/updateproduct'}> <button className="bg-yellow-500 px-3 my-5 rounded-md text-white">Upadte Prodcuts</button></Link> }
+                 { user.isStaf===true  && <Link href={'/deleteproduct'}> <button className="bg-red-500 px-3 my-5 rounded-md text-white">Delete Prodcuts</button></Link> } 
+                  <br/>
+                  { user.isAdmin===true    && <Link href={'/restraunat'}>Restraunt:- <button className="bg-green-500 mx-1 px-3 my-5 rounded-md text-white">Add Restaurant</button></Link>  }
+                  { user.isAdmin===true    && <Link href={'/updateRestraunt'}><button className="bg-yellow-500 mx-1 px-3 my-5 rounded-md text-white">Upadte Restaurant</button></Link>  }
+                  { user.isAdmin===true    && <Link href={'/deleteRestraunt'}><button className="bg-red-500 mx-1 px-3 my-5 rounded-md text-white">Delete Restaurant</button></Link>  }
+                    <br/>
                     {user.isAdmin===true && <Link href={'/deleteusers'}> Users:-<button className="bg-red-500 px-3 mx-2 my-5 rounded-md text-white">Ban User</button></Link>} <br/>
                     {user.isAdmin===true && <Link href={'/updateorders'}> Orders:-<button className="bg-yellow-500 px-3 mx-2 my-5 rounded-md text-white">Update Order Details</button></Link>}
-              </div>
+                    </div>
                    </div>
                 </div>
               </div>

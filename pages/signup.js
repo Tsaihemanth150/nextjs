@@ -1,26 +1,25 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
-const signup= ()=>{
-  const router = useRouter()
-  const [name,setName] = useState('')
-  const [email,setEmail]= useState('')
-  const [password,setPassword]=useState('') 
-  const [phone,setPhone]=useState('')
-  const [pincode,setPincode]=useState('')
+const Signup = () => {
+  const router = useRouter();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
+  const [pincode, setPincode] = useState('');
   const [image, setImage] = useState(null);
 
-
-  useEffect(()=>{
-    if(localStorage.getItem('token')){
-      router.push('/')
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      router.push('/');
     }
+  }, []);
 
-  },[])
-  
   const handleChange = (e) => {
     if (e.target.name === 'name') {
       setName(e.target.value);
@@ -28,36 +27,34 @@ const signup= ()=>{
       setEmail(e.target.value);
     } else if (e.target.name === 'password') {
       setPassword(e.target.value);
-    }else if(e.target.name==='phone'){
+    } else if (e.target.name === 'phone') {
       setPhone(e.target.value);
     } else if (e.target.name === 'image') {
       setImage(e.target.files[0]);
     } else if (e.target.name === 'pincode') {
       setPincode(e.target.value);
-      
-
     }
   }
-  
-  const handleSubmit= async (e)=>{
-    e.preventDefault(); 
-    const data = {name,email,password, phone: parseInt(phone, 10), pincode: parseInt(pincode, 10)}
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = { name, email, password, phone: parseInt(phone, 10), pincode: parseInt(pincode, 10) }
     const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/signup`, {
-      method: "POST", 
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
 
-    let response = await res.json()
-    setName('')
-    setEmail('')
-    setPassword('') 
-    setPhone('')
-    setPincode('')
+    let response = await res.json();
+    setName('');
+    setEmail('');
+    setPassword('');
+    setPhone('');
+    setPincode('');
     setImage(null);
-    toast.success('Sinup Successful now you can login !', {
+    toast.success('Signup successful! Now you can login.', {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -66,8 +63,8 @@ const signup= ()=>{
       draggable: true,
       progress: undefined,
       theme: "light",
-      });
-
+    });
+    router.push('/login');
   }
     return(
         <main>
@@ -155,7 +152,7 @@ theme="light"
 
     <p class="mt-10 text-center text-sm text-gray-500">
      Alredy a member?
-      <a href="/login" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"> Login here</a>
+      <Link href="/login" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"> Login here</Link>
     </p>
   </div>
 </div>
@@ -166,4 +163,4 @@ theme="light"
 
 
 
-export default signup;
+export default Signup;

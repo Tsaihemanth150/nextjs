@@ -31,31 +31,35 @@ const Navbar = ({ user, buyNow,logout, cart, addToCart, removeFromCart, clearCar
       className="bg-gray-100 block w-full max-w-screen-xl px-6 py-3 mx-auto text-black border shadow-md rounded-xl border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200"
     >
       <div className="flex items-center justify-start text-blue-gray-900">
-        <a
-          href="/"
+       <Link href={'/'}
           className="mr-4 block cursor-pointer py-1.5 font-sans text-base font-semibold leading-relaxed tracking-normal text-inherit antialiased"
         >
           <div style={{ borderRadius: "10px", overflow: "hidden" }}>
             <Image src={img} width={80} height={80}></Image>
           </div>
-        </a>
+        </Link>
 
         <div className="lg:block">
           <ul className="flex flex-col gap-2 my-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
             <li className="block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
-              <a href="/fooditems" className="flex items-center transition-colors hover:text-blue-500">
+              <Link href="/fooditems" className="flex items-center transition-colors hover:text-blue-500">
                 Food Items
-              </a>
+              </Link>
             </li>
             <li className="block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
-              <a href="/about" className="flex items-center transition-colors hover:text-blue-500">
+              <Link href="/viewRestraunat" className="flex items-center transition-colors hover:text-blue-500">
+               Restaurant
+              </Link>
+            </li>
+            <li className="block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+              <Link href="/about" className="flex items-center transition-colors hover:text-blue-500">
                 About us
-              </a>
+              </Link>
             </li>
             <li className="block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
-              <a href="/contactus" className="flex items-center transition-colors hover:text-blue-500">
+              <Link href="/contactus" className="flex items-center transition-colors hover:text-blue-500">
                 Conatcat Us
-              </a>
+              </Link>
             </li>
             <div className="cart text-2xl absolute right-0 top-11 mx-5 flex">
              {user.value && <VscAccount

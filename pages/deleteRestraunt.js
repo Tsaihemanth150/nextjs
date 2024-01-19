@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+// Import necessary modules
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
-import Link from "next/link";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from "next/router";
 const jwt = require('jsonwebtoken');
 
-const DeleteUsers = ({ users }) => {
+const DeleteRestaurant = ({ restaurant }) => {
   const router = useRouter();
 
   useEffect(() => {
@@ -23,19 +23,19 @@ const DeleteUsers = ({ users }) => {
         }
       }
     }
-  }, [router]);  // Added 'router' to the dependency array
+  }, []);
 
-  const handleDeleteClick = async (userId) => {
+  const handleDeleteClick = async (productId) => {
     try {
       const token = localStorage.getItem("token");
   
-      const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/deleteusers`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/deleteRestraunt`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ userId }),  // Changed 'productId' to 'userId'
+        body: JSON.stringify({ productId }),
       });
   
       if (!response.ok) {
@@ -50,14 +50,15 @@ const DeleteUsers = ({ users }) => {
       router.reload();
   
     } catch (error) {
-      console.error('Error deleting user:', error.message);  // Changed 'product' to 'user'
-      toast.error('Error deleting user');
+      console.error('Error deleting product:', error.message);
+      toast.error('Error deleting product');
     }
   };
+
   return (
     <main>
   <Head>
-    <title>Ban Users</title>
+    <title>Delete Restaurant</title>
   </Head>
     <div className="container mx-auto p-4">
       <div className="text-center text-3xl mb-4">
@@ -76,38 +77,37 @@ pauseOnHover
 theme="light"
 />
       <div>
-        <h2 className="text-2xl text-center font-bold mb-2">Ban Users</h2>
+        <h2 className="text-2xl text-center font-bold mb-2">View and delete Restaurant </h2>
         <table className="min-w-full bg-white border border-gray-300">
           <thead>
             <tr>
-              
-              <th className="py-2  border-b">Name</th>
-              <th className="py-2  border-b">Email</th>
-              <th className="py-2  border-b">Phone</th>
+              <th className="py-2  border-b">Serial No</th>
+              <th className="py-2  border-b">Restaurant Name</th>
+              <th className="py-2  border-b">Maximum Seats</th>
+              <th className="py-2  border-b">Booked Seats</th>
+              <th className="py-2  border-b">price</th>
               <th className="py-2  border-b">Address</th>
-              <th className="py-2  border-b">Pinocde</th>
               <th className="py-2  border-b">Actions</th>
             </tr>
           </thead>
           <tbody>
-            { users.map((users, index) => (
-             !users.isAdmin &&(  
-              <tr key={users.id}>
-               
-                <td className="py-2 px-6 border-b">{users.name}</td>
-                <td className="py-2 px-6 border-b">{users.email}</td>
-                <td className="py-2 px-4 border-b">{users.phone}</td>
-                <td className="py-2 px-4 border-b">{users.address}</td>
-                <td className="py-2 px-4 border-b">{users.pincode}</td>
+            {restaurant.map((restaurant, index) => (
+              <tr key={restaurant.id}>
+                <td className="py-2  px-10 border-b">{index + 1}</td>
+                <td className="py-2 px-6 border-b">{restaurant.name}</td>
+                <td className="py-2 px-6 border-b">{restaurant.maxSeats}</td>
+                <td className="py-2 px-4 border-b">{restaurant.bookedSeats}</td>
+                <td className="py-2 px-4 border-b">{restaurant.price}</td>
+                <td className="py-2 px-4 border-b">{restaurant.address}</td>
                 <td className="py-2 px-4 border-b">
                   <button
                     className="bg-red-500 px-3 my-1 rounded-md text-white"
-                    onClick={() => handleDeleteClick(users._id)}
+                    onClick={() => handleDeleteClick(restaurant._id)}
                   >
-                    Ban user
+                    Delete Product
                   </button>
                 </td>
-              </tr>)
+              </tr>
             ))}
           </tbody>
         </table>
@@ -117,22 +117,21 @@ theme="light"
   );
 };
 
-
 export async function getServerSideProps() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getUsers`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getRestaurant`);
     if (!res.ok) {
       throw new Error(`HTTP error! Status: ${res.status}`);
     }
 
     const data = await res.json();
-    const users = Array.isArray(data.users) ? data.users : [];
+    const restaurant = Array.isArray(data.restaurant) ? data.restaurant : [];
 
-    return { props: { users } };
+    return { props: { restaurant } };
   } catch (error) {
     console.error('Error fetching data:', error.message);
-    return { props: { users: null, error: true } };
+    return { props: { restaurant: null, error: true } };
   }
 }
 
-export default DeleteUsers;
+export default DeleteRestaurant;

@@ -2,75 +2,71 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
+const Login = () => {
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-const login= ()=>{
-  const router = useRouter()
-  const [email,setEmail]= useState('')
-  const [password,setPassword]=useState('') 
-
-  useEffect(()=>{
-    if(localStorage.getItem('token')){
-      router.push('/')
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      router.push('/');
     }
+  }, [router]);
 
-  },[])
-
-  
-  
   const handleChange = (e) => {
-   if (e.target.name === 'email') {
+    if (e.target.name === 'email') {
       setEmail(e.target.value);
     } else if (e.target.name === 'password') {
       setPassword(e.target.value);
     }
-  }
- const handleSubmit= async (e)=>{
-    e.preventDefault(); 
-    const data = {name,email,password}
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = { email, password };
     const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/login`, {
-      method: "POST", 
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
 
-    let response = await res.json()
-    setEmail('')
-    setPassword('') 
-    if(response.success){
-      localStorage.setItem('token',response.token)
-    toast.success('login successful', {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-
-     
+    let response = await res.json();
+    setEmail('');
+    setPassword('');
+    if (response.success) {
+      localStorage.setItem('token', response.token);
+      toast.success('Login successful', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
       });
-      setTimeout(()=>{
-        router.push(process.env.NEXT_PUBLIC_HOST)
-      },2000)
-      
-    }else{
-        toast.error(response.error, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-      }
-  }
+      setTimeout(() => {
+        router.push(process.env.NEXT_PUBLIC_HOST);
+      }, 2000);
+    } else {
+      toast.error(response.error, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
+
     
     return(
         <main>
@@ -108,7 +104,7 @@ theme="light"
         <div class="flex items-center justify-between">
           <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
           <div class="text-sm">
-            <a href="/forgot" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
+            <Link href="/forgot" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</Link>
           </div>
         </div>
         <div class="mt-2">
@@ -123,7 +119,7 @@ theme="light"
 
     <p class="mt-10 text-center text-sm text-gray-500">
       Not a member?
-      <a href="/signup" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"> signup to be part jofull family</a>
+      <Link href="/signup" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"> signup to be part jofull family</Link>
     </p>
   </div>
 </div>
@@ -134,4 +130,4 @@ theme="light"
 
 
 
-export default login;
+export default Login;

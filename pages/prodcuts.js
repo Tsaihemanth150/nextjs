@@ -34,7 +34,7 @@ const Products = () => {
         router.push('/login');
       }
     }
-  }, []);
+  }, [router]); 
   
 
   const [title, setTitle] = useState('');
@@ -133,7 +133,7 @@ const Products = () => {
     return(
       <main>
   <Head>
-    <title>Prodcut's</title>
+    <title>Prodcuts</title>
   </Head>
       
         <div>

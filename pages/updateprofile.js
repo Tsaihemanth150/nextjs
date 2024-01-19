@@ -4,9 +4,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from "next/router";
 const jwt = require('jsonwebtoken');
+import Link from "next/link";
+
 import { useForm } from "react-hook-form";
 
-const updateprofile = () =>{
+const UpdateProfile = () =>{
     const router = useRouter();
   const { register, handleSubmit, setValue } = useForm();
 
@@ -121,4 +123,4 @@ theme="light"
   };
   
 
-export default updateprofile;
+export default UpdateProfile;

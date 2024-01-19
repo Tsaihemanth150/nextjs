@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 const jwt = require('jsonwebtoken');
 import Link from "next/link";
 
-const UpdateProduct = ({ products }) => {
+const UpadteRestraunt = ({ restaurant }) => {
   const router = useRouter();
 
   useEffect(() => {
@@ -23,13 +23,13 @@ const UpdateProduct = ({ products }) => {
         }
       }
     }
-  }, []);
+  }, [router]);
 
   const handleUpdateClick = (productId) => {
     // Redirect to the update page with the respective product ID without including it in the URL
     router.push(
       {
-        pathname: '/updateitems',
+        pathname: '/upadterestraunt',
         query: { productId },
       },
       undefined,
@@ -53,27 +53,27 @@ const UpdateProduct = ({ products }) => {
           <thead>
             <tr>
               <th className="py-2  border-b">Serial No</th>
-              <th className="py-2  border-b">Title</th>
-              <th className="py-2  border-b">Item</th>
+              <th className="py-2  border-b">Name Of the Restaurant</th>
+              <th className="py-2  border-b">Max Seats</th>
+              <th className="py-2  border-b">booked Seats</th>
               <th className="py-2  border-b">Price</th>
-              <th className="py-2  border-b">Quantity</th>
-              <th className="py-2  border-b">Catgeory</th>
+              <th className="py-2  border-b">Address</th>
               <th className="py-2  border-b">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {products.map((product, index) => (
-              <tr key={product.id}>
+            {restaurant.map((restaurant, index) => (
+              <tr key={restaurant.id}>
                 <td className="py-2  px-10 border-b">{index + 1}</td>
-                <td className="py-2 px-6 border-b">{product.title}</td>
-                <td className="py-2 px-6 border-b">{product.item}</td>
-                <td className="py-2 px-4 border-b">{product.price}</td>
-                <td className="py-2 px-4 border-b">{product.availableQnty}</td>
-                <td className="py-2 px-4 border-b">{product.category}</td>
+                <td className="py-2 px-6 border-b">{restaurant.name}</td>
+                <td className="py-2 px-6 border-b">{restaurant.maxSeats}</td>
+                <td className="py-2 px-4 border-b">{restaurant.bookedSeats}</td>
+                <td className="py-2 px-4 border-b">{restaurant.price}</td>
+                <td className="py-2 px-4 border-b">{restaurant.address}</td>
                 <td className="py-2 px-4 border-b">
                   <button
                     className="bg-yellow-500 px-3 my-1 rounded-md text-white"
-                    onClick={() => handleUpdateClick(product._id)}
+                    onClick={() => handleUpdateClick(restaurant._id)}
                   >
                     Update Product
                   </button>
@@ -90,19 +90,19 @@ const UpdateProduct = ({ products }) => {
 
 export async function getServerSideProps() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getProducts`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getRestaurant`);
     if (!res.ok) {
       throw new Error(`HTTP error! Status: ${res.status}`);
     }
 
     const data = await res.json();
-    const products = Array.isArray(data.products) ? data.products : [];
+    const restaurant = Array.isArray(data.restaurant) ? data.restaurant : [];
 
-    return { props: { products } };
+    return { props: { restaurant } };
   } catch (error) {
     console.error('Error fetching data:', error.message);
-    return { props: { products: null, error: true } };
+    return { props: { restaurant: null, error: true } };
   }
 }
 
-export default UpdateProduct;
+export default UpadteRestraunt;

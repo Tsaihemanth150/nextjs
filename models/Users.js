@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
   phone: { type: Number },
   pincode: { type: Number },
   wallate:{type:Number,default:0},
-  
+  isStaf: { type: Boolean, default: false },
   isAdmin: { type: Boolean, default: false } 
 }, { timestamps: true });
 

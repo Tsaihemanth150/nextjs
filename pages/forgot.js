@@ -1,8 +1,9 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
-const forgot=()=>{
+const Forgot = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
 
@@ -10,7 +11,7 @@ const forgot=()=>{
     if (localStorage.getItem('token')) {
       router.push('/');
     }
-  }, []);
+  }, [router]);
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
@@ -74,7 +75,7 @@ const forgot=()=>{
                 </div>
         <p class="mt-5 text-center text-sm text-gray-500">
           
-          <a href="/login" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"> Login here</a>
+          <Link href="/login" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"> Login here</Link>
         </p>
       </div>
     </div>
@@ -83,4 +84,4 @@ const forgot=()=>{
 }
 
 
-export default forgot;
+export default Forgot;
