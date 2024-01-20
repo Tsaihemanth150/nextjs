@@ -81,7 +81,7 @@ const MyAccount = () => {
             </div>
 
             <section className="text-gray-600 body-font">
-              <div className="container px-5 py-24 mx-auto flex flex-col">
+              <div className="container px-5  mx-auto flex flex-col">
                 <div className="lg:w-4/6 mx-auto">
                   <div className="flex flex-col sm:flex-row mt-10">
                     <div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
@@ -114,13 +114,20 @@ const MyAccount = () => {
                       
                       <Link href={'/addAmount'}><button className="bg-cyan-500 px-2 rounded-md text-white">Add Amount</button></Link> <br/>
 
-                    
+                    { user.isAdmin===false && <div className="my-10 text-xl">Need Help ? Rise a Ticket...</div>
+                    && <Link href={'/ticket'}><button className="bg-blue-700 mx-1 px-3 my-5 rounded-md text-white">Rise A Ticket</button></Link>
+                     }
+
+                    { user.isAdmin===false 
+                    && <Link href={'/userTicket'}><button className="bg-blue-700 mx-1 px-3 my-5 rounded-md text-white">My Ticket</button></Link>
+                     }
+
                  { user.isAdmin===true    && <Link href={'/prodcuts'}>Prodcuts:- <button className="bg-green-500 mx-1 px-3 my-5 rounded-md text-white">Add Prodcuts</button></Link>  }
                  { user.isAdmin===true    && <Link href={'/updateproduct'}> <button className="bg-yellow-500 px-3 my-5 rounded-md text-white">Upadte Prodcuts</button></Link> }
                     { user.isAdmin===true  && <Link href={'/deleteproduct'}> <button className="bg-red-500 px-3 my-5 rounded-md text-white">Delete Prodcuts</button></Link> } 
                   <br/>
                         
-              { user.isStaf===true  && <Link href={'/prodcuts'}>Prodcuts:- <button className="bg-green-500 mx-1 px-3 my-5 rounded-md text-white">Add Prodcuts</button></Link>  }
+                 { user.isStaf===true  && <Link href={'/prodcuts'}>Prodcuts:- <button className="bg-green-500 mx-1 px-3 my-5 rounded-md text-white">Add Prodcuts</button></Link>  }
                  { user.isStaf===true    && <Link href={'/updateproduct'}> <button className="bg-yellow-500 px-3 my-5 rounded-md text-white">Upadte Prodcuts</button></Link> }
                  { user.isStaf===true  && <Link href={'/deleteproduct'}> <button className="bg-red-500 px-3 my-5 rounded-md text-white">Delete Prodcuts</button></Link> } 
                   <br/>
@@ -130,6 +137,9 @@ const MyAccount = () => {
                     <br/>
                     {user.isAdmin===true && <Link href={'/deleteusers'}> Users:-<button className="bg-red-500 px-3 mx-2 my-5 rounded-md text-white">Ban User</button></Link>} <br/>
                     {user.isAdmin===true && <Link href={'/updateorders'}> Orders:-<button className="bg-yellow-500 px-3 mx-2 my-5 rounded-md text-white">Update Order Details</button></Link>}
+                    <br/>
+                    {user.isAdmin===true && <Link href={'/viewTicket'}> Ticket:-<button className="bg-blue-500 px-3 mx-2 my-5 rounded-md text-white">My Tickets</button></Link>}
+                    
                     </div>
                    </div>
                 </div>

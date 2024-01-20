@@ -79,15 +79,15 @@ const Navbar = ({ user, buyNow,logout, cart, addToCart, removeFromCart, clearCar
                   onMouseLeave={() => {
                     setDropdown(false);
                   }}
-                  className="absolute text-sm px-5 w-20 top-8 bg-transparent right-5" >
+                  className="absolute text-sm px-10 py-2   w-20 top-8 bg-transparent -left-1" >
                   <ul>
                     <Link href={'/myaccount'}>
-                      <li className="text-sm hover:text-blue-500">My Account</li>
+                      <li className="text-sm py-1 hover:text-blue-500">Account</li>
                     </Link>
                     <Link href={'/myorders'}>
-                      <li className="text-sm hover:text-blue-500">Orders</li>
+                      <li className="text-sm py-1 hover:text-blue-500">Orders</li>
                     </Link>
-                    <li onClick={logout} className="text-sm hover:text-blue-500">Logout</li>
+                    <li onClick={logout} className="text-sm py-1 hover:text-blue-500">Logout</li>
                   </ul>
                 </div>
               )}
